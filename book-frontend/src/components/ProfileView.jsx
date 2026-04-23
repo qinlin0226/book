@@ -1,5 +1,5 @@
 import MetricCard from './MetricCard'
-import { coverStyle, formatDate } from '../utils/bookUi'
+import { coverStyle } from '../utils/bookUi'
 
 /**
  * 用户中心视图，负责资料编辑、阅读记录与用户管理展示。
@@ -11,16 +11,17 @@ function ProfileView({
   session,
   profile,
   displayName,
+  profileSummary,
+  profileMetrics,
   records,
-  recommendData,
-  books,
+  recommendedBooks,
   profileForm,
   panelLoading,
   statusMeta,
   actionBookId,
   isAdmin,
   userAdminLoading,
-  managedUsers,
+  managedUserCards,
   sessionUserId,
   onProfileFormChange,
   onProfileSave,
@@ -56,11 +57,11 @@ function ProfileView({
         <div className="profile-copy">
           <span className="eyebrow">USER CENTER</span>
           <h3>{displayName}</h3>
-          <p>{profile?.role === 1 ? '管理员视角，能调状态、管书架。' : '你的阅读画像正在形成，推荐会越来越像你。'}</p>
+          <p>{profileSummary}</p>
           <div className="metric-row">
-            <MetricCard label="在读书单" value={records.filter((item) => item.readStatus === 1).length} />
-            <MetricCard label="已读完" value={records.filter((item) => item.readStatus === 0).length} />
-            <MetricCard label="推荐命中" value={recommendData.recentlyRead.length} />
+            <MetricCard label="追更数" value={profileMetrics.followingCount} />
+            <MetricCard label="已读完" value={profileMetrics.finishedCount} />
+            <MetricCard label="阅读数" value={profileMetrics.readingCount} />
           </div>
         </div>
       </div>
@@ -132,9 +133,9 @@ function ProfileView({
 
               {userAdminLoading ? <div className="empty-inline">正在读取用户列表...</div> : null}
 
-              {managedUsers.length ? (
+              {managedUserCards.length ? (
                 <div className="user-card-strip">
-                  {managedUsers.map((user) => (
+                  {managedUserCards.map((user) => (
                     <article className="user-card" key={user.id}>
                       <div className="user-card-head">
                         <div className="user-card-avatar" style={{ backgroundImage: coverStyle(user.avatarUrl, user.nickname || user.username) }}>
@@ -146,9 +147,9 @@ function ProfileView({
                         </div>
                       </div>
                       <div className="user-card-meta">
-                        <span>{user.role === 1 ? '管理员' : '普通用户'}</span>
-                        <span>{user.status === 1 ? '启用中' : '已禁用'}</span>
-                        <span>{formatDate(user.createTime)}</span>
+                        <span>{user.roleLabel}</span>
+                        <span>{user.statusLabel}</span>
+                        <span>{user.createTimeLabel}</span>
                       </div>
                       <div className="user-card-actions">
                         <button className="ghost-button small" type="button" onClick={() => onEditManagedUser(user)}>
@@ -172,7 +173,7 @@ function ProfileView({
                 <h3>个性推荐</h3>
               </div>
               <div className="recommend-strip">
-                {(recommendData.recommends.length ? recommendData.recommends : books).map((book) => (
+                {recommendedBooks.map((book) => (
                   <div className="recommend-tile" key={book.id}>
                     <div className="recommend-cover" style={{ backgroundImage: coverStyle(book.coverUrl, book.title) }} />
                     <div>

@@ -14,3 +14,44 @@
 [2m22:57:40[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
 [2m23:23:30[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
 [2m23:24:27[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.jsx[22m
+[2m23:43:14[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/AdminView.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/AdminView.jsx, /src/components/HomeView.jsx, /src/components/ProfileView.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mvite.config.js changed, restarting server...[39m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles.css, /src/styles/index.css[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/AdminView.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/AuthModal.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/HomeView.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/ManagedUserModal.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/MetricCard.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/ProfileView.jsx[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m23:43:15[22m [36m[1m[vite][22m[39m server restarted.
+[2m23:43:16[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m23:43:16[22m [36m[1m[vite][22m[39m [32mvite.config.js changed, restarting server...[39m
+[2m23:43:16[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:43:16[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/main.jsx[22m
+[2m23:43:16[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m23:43:16[22m [36m[1m[vite][22m[39m server restarted.
+[2m23:46:59[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:51:23[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:51:27[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m23:54:48[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m23:54:52[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m23:55:08[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m23:58:43[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m00:00:42[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m00:00:50[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m00:00:58[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m00:09:31[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/ProfileView.jsx[22m
+[2m00:21:33[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m
+[2m00:32:35[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/HomeView.jsx[22m
+[2m00:32:54[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/styles/index.css[22m
+[2m00:49:09[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.jsx[22m

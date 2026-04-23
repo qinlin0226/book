@@ -6,6 +6,7 @@
   background: #050816;
   color: #f5f7ff;
   --side-blank-height: clamp(420px, 56vh, 560px);
+  --side-rail-width: 300px;
   --panel: rgba(12, 16, 30, 0.76);
   --panel-strong: rgba(20, 24, 42, 0.96);
   --line: rgba(255, 255, 255, 0.09);
@@ -49,7 +50,7 @@ button {
 .app-shell {
   position: relative;
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr) 320px;
+  grid-template-columns: var(--side-rail-width) minmax(0, 1fr) var(--side-rail-width);
   gap: 20px;
   min-height: 100vh;
   padding: 24px;
@@ -98,7 +99,6 @@ button {
 .right-panel-card,
 .profile-card,
 .auth-sheet,
-.flash-bar,
 .topbar {
   backdrop-filter: blur(18px);
   background: var(--panel);
@@ -110,19 +110,85 @@ button {
 .rail-card,
 .right-panel-card,
 .side-blank-card,
-.profile-card,
-.flash-bar {
+.profile-card {
   border-radius: 28px;
   padding: 20px;
 }
 
-/* 左右两侧使用统一高度的空白格，保证视觉长度一致。 */
+/* 左右侧展示使用固定高度，避免内部循环轨道撑开并与主推荐底部齐平。 */
 .side-blank-card {
-  min-height: var(--side-blank-height);
+  position: relative;
+  height: var(--side-blank-height);
+  min-height: 0;
   padding: 0;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
     var(--panel);
+  overflow: hidden;
+}
+
+.side-book-marquee {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+}
+
+.side-book-marquee::before,
+.side-book-marquee::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 84px;
+  pointer-events: none;
+}
+
+.side-book-marquee::before {
+  top: 0;
+  background: linear-gradient(180deg, rgba(7, 10, 22, 0.92), transparent);
+}
+
+.side-book-marquee::after {
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(7, 10, 22, 0.94), transparent);
+}
+
+.side-book-track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  width: 100%;
+  padding: 18px 24px;
+  animation: sideCoverScrollDown 18s linear infinite;
+}
+
+.side-book-cover {
+  aspect-ratio: 3 / 4;
+  min-height: 0;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.28);
+}
+
+.side-book-empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 14px;
+}
+
+@keyframes sideCoverScrollDown {
+  from {
+    transform: translateY(-50%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 .brand-chip,
@@ -373,10 +439,6 @@ button {
   color: white;
 }
 
-.flash-bar {
-  color: white;
-}
-
 .feed-stage {
   position: relative;
   min-height: calc(100vh - 198px);
@@ -480,6 +542,22 @@ button {
   gap: 12px;
   color: rgba(255, 255, 255, 0.76);
   font-size: 13px;
+}
+
+.feed-action-row {
+  margin-top: 18px;
+  gap: 10px;
+}
+
+.feed-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  height: 40px;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1;
 }
 
 .feed-topline {

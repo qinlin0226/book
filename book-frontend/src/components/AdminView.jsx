@@ -9,7 +9,8 @@ import { coverStyle } from '../utils/bookUi'
  */
 function AdminView({
   isAdmin,
-  adminBooks,
+  adminMetrics,
+  adminBookItems,
   editingBookId,
   bookForm,
   adminLoading,
@@ -41,9 +42,9 @@ function AdminView({
           <p>新增、编辑、上架和删除都走真实后端接口。首页推荐流会立刻反映你的操作。</p>
         </div>
         <div className="metric-row">
-          <MetricCard label="总图书" value={adminBooks.length} />
-          <MetricCard label="已上架" value={adminBooks.filter((item) => item.status === 1).length} />
-          <MetricCard label="待调整" value={adminBooks.filter((item) => item.status !== 1).length} />
+          <MetricCard label="总图书" value={adminMetrics.totalCount} />
+          <MetricCard label="已上架" value={adminMetrics.upCount} />
+          <MetricCard label="待调整" value={adminMetrics.pendingCount} />
         </div>
       </div>
 
@@ -104,16 +105,16 @@ function AdminView({
           {adminLoading ? <div className="empty-inline">正在读取图书清单...</div> : null}
 
           <div className="admin-book-list">
-            {adminBooks.map((book) => (
+            {adminBookItems.map((book) => (
               <article className="admin-book-item" key={book.id}>
                 <div className="admin-book-left">
                   <div className="admin-book-cover" style={{ backgroundImage: coverStyle(book.coverUrl, book.title) }} />
                   <div className="admin-book-copy">
                     <div className="admin-book-heading">
                       <strong>{book.title}</strong>
-                      <span className={`book-status ${book.status === 1 ? 'up' : 'down'}`}>{book.status === 1 ? '已上架' : '已下架'}</span>
+                      <span className={`book-status ${book.statusClassName}`}>{book.statusLabel}</span>
                     </div>
-                    <p>{book.author} · {book.category} · {book.publishYear || '年份待补'}</p>
+                    <p>{book.author} 路 {book.category} 路 {book.publishYear || '年份待补'}</p>
                     <span>{book.description || '暂无简介'}</span>
                   </div>
                 </div>

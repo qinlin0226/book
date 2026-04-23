@@ -9,11 +9,11 @@ import { coverStyle } from '../utils/bookUi'
 function HomeView({
   homeLoading,
   currentFeedBook,
+  currentFeedRecord,
+  currentReadState,
   searchKeyword,
   filteredFeaturedBooks,
   currentFeedIndex,
-  recordMap,
-  statusMeta,
   session,
   isAdmin,
   actionBookId,
@@ -22,13 +22,10 @@ function HomeView({
   onFeedTouchEnd,
   onShiftFeed,
   onToggleRecordStatus,
-  onAddToReading,
+  onAddToShelf,
   onOpenAuth,
   onEditBook,
 }) {
-  const record = currentFeedBook ? recordMap.get(currentFeedBook.id) : null
-  const readState = record ? statusMeta[record.readStatus] : null
-
   return (
     <section className="feed-stage" onWheel={onFeedWheel} onTouchStart={onFeedTouchStart} onTouchEnd={onFeedTouchEnd}>
       {homeLoading ? (
@@ -57,39 +54,40 @@ function HomeView({
             </button>
           </div>
           <div className="feed-content feed-content-focus">
-            <div className="feed-counter">{String(currentFeedIndex + 1).padStart(2, '0')} / {String(filteredFeaturedBooks.length).padStart(2, '0')}</div>
+            <div className="feed-counter">
+              {String(currentFeedIndex + 1).padStart(2, '0')} / {String(filteredFeaturedBooks.length).padStart(2, '0')}
+            </div>
             <h3>{currentFeedBook.title}</h3>
             <p>{currentFeedBook.description || '适合在深夜刷到的那种书，几页就能进入状态。'}</p>
             <div className="meta-row">
               <span>{currentFeedBook.author || '匿名作者'}</span>
               <span>{currentFeedBook.readCount || 0} 次触达</span>
             </div>
-            <div className="action-row">
+            <div className="action-row feed-action-row">
               {session ? (
-                record ? (
+                currentFeedRecord ? (
                   <button
-                    className={`status-pill ${readState?.className || ''}`}
-                    onClick={() => onToggleRecordStatus(record)}
+                    className={`status-pill ${currentReadState?.className || ''} feed-action-button`}
+                    onClick={() => onToggleRecordStatus(currentFeedRecord)}
                     disabled={actionBookId === currentFeedBook.id}
                   >
-                    {actionBookId === currentFeedBook.id ? '更新中...' : readState?.label}
+                    {actionBookId === currentFeedBook.id ? '更新中...' : currentReadState?.label}
                   </button>
                 ) : (
-                  <button className="primary-button" onClick={() => onAddToReading(currentFeedBook)} disabled={actionBookId === currentFeedBook.id}>
-                    {actionBookId === currentFeedBook.id ? '加入中...' : '加入在读'}
+                  <button className="primary-button feed-action-button" onClick={() => onAddToShelf(currentFeedBook)} disabled={actionBookId === currentFeedBook.id}>
+                    {actionBookId === currentFeedBook.id ? '加入中...' : '加入书架'}
                   </button>
                 )
               ) : (
-                <button className="primary-button" onClick={onOpenAuth}>
-                  登录后追更
+                <button className="primary-button feed-action-button" onClick={onOpenAuth}>
+                  登录后加入书架
                 </button>
               )}
               {isAdmin ? (
-                <button className="ghost-button small" onClick={() => onEditBook(currentFeedBook)}>
+                <button className="ghost-button small feed-action-button" onClick={() => onEditBook(currentFeedBook)}>
                   直接编辑
                 </button>
               ) : null}
-              <span className="swipe-note">上下滑动或滚轮切换下一本，像短视频一样看书。</span>
             </div>
           </div>
         </article>
