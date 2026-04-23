@@ -159,7 +159,7 @@ button {
   gap: 16px;
   width: 100%;
   padding: 18px 24px;
-  animation: sideCoverScrollDown 18s linear infinite;
+  animation: sideCoverScrollDown 100s linear infinite;
 }
 
 .side-book-cover {
@@ -475,7 +475,7 @@ button {
 }
 
 .feed-overlay {
-  background: linear-gradient(180deg, rgba(4, 8, 18, 0.08), rgba(4, 8, 18, 0.82) 65%, rgba(4, 8, 18, 0.96));
+  background: linear-gradient(180deg, rgba(4, 8, 18, 0.01), rgba(4, 8, 18, 0.24) 50%, rgba(4, 8, 18, 0.42) 74%, rgba(4, 8, 18, 0.56));
 }
 
 .feed-content {
@@ -569,16 +569,16 @@ button {
 }
 
 .feed-content h3 {
-  font-size: 52px;
+  font-size: 48px;
   line-height: 0.95;
   margin: 10px 0 8px;
 }
 
 .feed-card-focus .feed-content h3 {
   max-width: 10ch;
-  font-size: clamp(62px, 8vw, 110px);
+  font-size: clamp(48px, 6vw, 84px);
   line-height: 0.9;
-  margin: 14px 0 12px;
+  margin: 8px 0 12px;
 }
 
 .swipe-note {

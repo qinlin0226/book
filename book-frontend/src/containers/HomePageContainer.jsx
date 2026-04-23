@@ -18,11 +18,14 @@ import useSideMarqueeHeightSync from '../hooks/useSideMarqueeHeightSync'
  * @return JSX.Element
  */
 function HomePageContainer({ onSwitchTab, onRequestEditBook }) {
+  // 统一控制推荐卡片切换频率，避免按钮和滚轮切换过快
+  const FEED_SWITCH_INTERVAL = 980
   const { session, isAdmin, actions: sessionActions } = useSession()
   const { home, profile, actions } = useLibraryWorkspace()
   const [searchKeyword, setSearchKeyword] = useState('')
   const [currentFeedIndex, setCurrentFeedIndex] = useState(0)
   const wheelLockRef = useRef(0)
+  const feedSwitchLockRef = useRef(0)
   const touchStartYRef = useRef(null)
 
   const shelfBooks = useMemo(() => getShelfBooks(home.books), [home.books])
@@ -55,6 +58,12 @@ function HomePageContainer({ onSwitchTab, onRequestEditBook }) {
       return
     }
 
+    const now = Date.now()
+    if (now - feedSwitchLockRef.current < FEED_SWITCH_INTERVAL) {
+      return
+    }
+
+    feedSwitchLockRef.current = now
     setCurrentFeedIndex((current) => {
       const nextIndex = current + step
 
@@ -93,7 +102,7 @@ function HomePageContainer({ onSwitchTab, onRequestEditBook }) {
     }
 
     const now = Date.now()
-    if (now - wheelLockRef.current < 420) {
+    if (now - wheelLockRef.current < FEED_SWITCH_INTERVAL) {
       event.preventDefault()
       return
     }

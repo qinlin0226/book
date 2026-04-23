@@ -54,14 +54,12 @@ function HomeView({
             </button>
           </div>
           <div className="feed-content feed-content-focus">
-            <div className="feed-counter">
-              {String(currentFeedIndex + 1).padStart(2, '0')} / {String(filteredFeaturedBooks.length).padStart(2, '0')}
-            </div>
+            {/* 焦点卡片直接展示书名，去掉序号减少视觉压力 */}
             <h3>{currentFeedBook.title}</h3>
             <p>{currentFeedBook.description || '适合在深夜刷到的那种书，几页就能进入状态。'}</p>
             <div className="meta-row">
               <span>{currentFeedBook.author || '匿名作者'}</span>
-              <span>{currentFeedBook.readCount || 0} 次触达</span>
+              <span>热度值{currentFeedBook.readCount || 0} </span>
             </div>
             <div className="action-row feed-action-row">
               {session ? (
