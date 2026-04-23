@@ -27,7 +27,8 @@ qa-artifacts
 *.njsproj
 *.sln
 *.sw?
-
+..idea
+./.idea
 # maven #
 target
 
