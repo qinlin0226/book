@@ -114,8 +114,8 @@ function AdminView({
                       <strong>{book.title}</strong>
                       <span className={`book-status ${book.statusClassName}`}>{book.statusLabel}</span>
                     </div>
-                    <p>{book.author} 路 {book.category} 路 {book.publishYear || '年份待补'}</p>
-                    <span>{book.description || '暂无简介'}</span>
+                    <p>作者：{book.author} 分类：{book.category}  出版年份：{book.publishYear || '年份待补'}</p>
+                    <span>简介：{book.description || '暂无简介'}</span>
                   </div>
                 </div>
                 <div className="admin-book-actions">
