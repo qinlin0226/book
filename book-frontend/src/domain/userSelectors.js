@@ -38,7 +38,7 @@ export function getRoleLabel(role) {
  * @return string
  */
 export function getProfileSummary(role) {
-  return role === 1 ? '管理员视角，能调状态、管书架。' : '你的阅读画像正在形成，推荐会越来越像你。'
+  return role === 1 ? '管理员开始你的工作吧' : '开始你的阅读之旅吧'
 }
 
 /**
