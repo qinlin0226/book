@@ -16,7 +16,11 @@ dist-ssr
 *.local
 qa-artifacts/
 qa-artifacts
-
+./.qa-artifacts/
+/target
+./.target
+../.target
+./.target/
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -54,7 +58,7 @@ Thumbs.db
 *.jar
 *.war
 *.ear
-/target
+
 
 # Flattened pom
 .flattened-pom.xml
