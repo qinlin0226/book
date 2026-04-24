@@ -59,9 +59,6 @@ CREATE TABLE `t_reading_record` (
   KEY `idx_book_id` (`book_id`) COMMENT '图书ID索引'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户阅读记录表';
 
-ALTER TABLE t_reading_record MODIFY id BIGINT AUTO_INCREMENT;
-ALTER TABLE t_book MODIFY id BIGINT AUTO_INCREMENT;
-ALTER TABLE t_user MODIFY id BIGINT AUTO_INCREMENT;
 
 ALTER TABLE t_reading_record
 ADD CONSTRAINT fk_reading_user
@@ -72,35 +69,3 @@ ALTER TABLE t_reading_record
 ADD CONSTRAINT fk_reading_book
 FOREIGN KEY (book_id) REFERENCES t_book(id)
 ON UPDATE CASCADE;
--- ----------------------------
--- 初始化数据
--- ----------------------------
-
--- 1. 插入用户
-INSERT INTO `t_user` (`username`, `password`, `nickname`, `avatar_url`, `role`, `status`) VALUES
-('admin', 'e10adc3949ba59abbe56e057f20f883e', '系统管理员', '/img/avatar/admin.png', 1, 1),
-('zhangsan', 'e10adc3949ba59abbe56e057f20f883e', '张三', '/img/avatar/user1.png', 0, 1),
-('lisi', 'e10adc3949ba59abbe56e057f20f883e', '李四', '/img/avatar/user2.png', 0, 1);
-
-INSERT INTO `t_user` (`username`, `password`, `nickname`, `avatar_url`, `role`, `status`) VALUES
-('123', 'e10adc3949ba59abbe56e057f20f883e', '1', '/img/avatar/admin.png', 0, 1),
-('1234', 'e10adc3949ba59abbe56e057f20f883e', '2', '/img/avatar/user1.png', 0, 1),
-('12345', 'e10adc3949ba59abbe56e057f20f883e', '3', '/img/avatar/user2.png', 0, 1);
-
-
--- 2. 插入图书
-INSERT INTO `t_book` (`title`, `author`, `cover_url`, `description`, `category`, `publish_year`, `status`, `read_count`) VALUES
-('深入理解计算机系统', 'Randal E. Bryant', '/img/book/csapp.jpg', '程序员必读经典。', '计算机技术', 2016, 1, 1024),
-('三体全集', '刘慈欣', '/img/book/3body.jpg', '中国科幻文学里程碑。', '科幻小说', 2008, 1, 856),
-('人类简史', '尤瓦尔·赫拉利', '/img/book/sapiens.jpg', '讲述人类进化历程。', '历史人文', 2014, 1, 532),
-('旧书回收示例', '佚名', '/img/book/old.jpg', '这是一本已经下架的旧书。', '其他', 1990, 0, 12);
-
--- 3. 插入阅读记录 (用户ID为2，即zhangsan)
--- 记录1：深入理解计算机系统 -> 状态：0 (已读)
--- 记录2：三体全集 -> 状态：0 (已读)
--- 记录3：人类简史 -> 状态：1 (未读)
-INSERT INTO `t_reading_record` (`user_id`, `book_id`, `book_title`, `book_cover`, `read_status`) VALUES
-(2, 1, '深入理解计算机系统', '/img/book/csapp.jpg', 0),
-(2, 2, '三体全集', '/img/book/3body.jpg', 0),
-(2, 3, '人类简史', '/img/book/sapiens.jpg', 1),
-(3, 2, '三体全集', '/img/book/3body.jpg', 0);
