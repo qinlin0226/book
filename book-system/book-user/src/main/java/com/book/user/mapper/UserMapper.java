@@ -7,14 +7,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * 用户数据访问接口
+ * 用户数据访问接口，负责用户表基础持久化操作。
  *
  * @author OpenCode
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
+
     /**
-     * 物理删除用户主记录
+     * 物理删除用户主记录。
      *
      * @param id 用户ID
      * @return 影响行数

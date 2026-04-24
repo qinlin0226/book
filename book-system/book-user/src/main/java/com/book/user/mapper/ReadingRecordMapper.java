@@ -7,14 +7,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * 用户阅读记录数据访问接口
+ * 阅读记录数据访问接口，负责用户模块侧的记录清理操作。
  *
  * @author OpenCode
  */
 @Mapper
 public interface ReadingRecordMapper extends BaseMapper<ReadingRecord> {
+
     /**
-     * 按用户ID物理删除阅读记录
+     * 根据用户ID物理删除阅读记录。
      *
      * @param userId 用户ID
      * @return 影响行数

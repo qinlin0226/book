@@ -1,17 +1,22 @@
 package com.book.user.dto;
 
-import lombok.Data;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 管理员新增或修改用户请求参数
+ * 管理员新增或修改用户请求对象。
  *
  * @author OpenCode
  */
-@Data
+@Getter
+@Setter
 public class AdminUserSaveRequest {
+
     /**
      * 用户名
      */
+    @NotBlank(message = "用户名不能为空")
     private String username;
 
     /**
@@ -30,12 +35,12 @@ public class AdminUserSaveRequest {
     private String avatarUrl;
 
     /**
-     * 角色
+     * 角色标识
      */
     private Integer role;
 
     /**
-     * 状态
+     * 账号状态
      */
     private Integer status;
 }

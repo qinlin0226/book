@@ -1,16 +1,19 @@
 package com.book.user.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 /**
- * 管理员用户列表展示对象
+ * 管理员用户列表响应对象，提供后台用户管理展示字段。
  *
  * @author OpenCode
  */
-@Data
+@Getter
+@Setter
 public class AdminUserItemResponse {
+
     /**
      * 用户ID
      */
@@ -32,12 +35,12 @@ public class AdminUserItemResponse {
     private String avatarUrl;
 
     /**
-     * 角色
+     * 角色标识
      */
     private Integer role;
 
     /**
-     * 状态
+     * 账号状态
      */
     private Integer status;
 
