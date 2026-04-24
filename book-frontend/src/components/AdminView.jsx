@@ -76,7 +76,7 @@ function AdminView({
             </label>
             <label>
               <span>封面链接</span>
-              <input value={bookForm.coverUrl} onChange={(event) => onBookFormChange('coverUrl', event.target.value)} placeholder="https://..." />
+              <input value={bookForm.coverUrl} onChange={(event) => onBookFormChange('coverUrl', event.target.value)} placeholder="/assets/books/openlibrary-8027976.jpg" />
             </label>
           </div>
           <label>

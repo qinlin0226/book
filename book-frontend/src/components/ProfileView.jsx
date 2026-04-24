@@ -78,7 +78,7 @@ function ProfileView({
           </label>
           <label>
             <span>头像链接</span>
-            <input value={profileForm.avatarUrl} onChange={(event) => onProfileFormChange('avatarUrl', event.target.value)} placeholder="https://..." />
+            <input value={profileForm.avatarUrl} onChange={(event) => onProfileFormChange('avatarUrl', event.target.value)} placeholder="/assets/avatars/dicebear-admin.svg" />
           </label>
           <button className="primary-button" disabled={panelLoading}>
             {panelLoading ? '保存中...' : '保存资料'}

@@ -1,4 +1,45 @@
 /**
+ * 将远程图片地址映射为前端本地静态资源地址。
+ *
+ * @param url 原始图片地址
+ * @return string
+ */
+export function resolveAssetUrl(url) {
+  if (!url) {
+    return ''
+  }
+
+  if (url.startsWith('/assets/')) {
+    return url
+  }
+
+  try {
+    const parsedUrl = new URL(url, 'http://localhost')
+
+    if (parsedUrl.hostname === 'covers.openlibrary.org') {
+      const match = parsedUrl.pathname.match(/\/b\/id\/(\d+)-L\.(jpg|jpeg|png|webp)$/i)
+
+      if (match) {
+        return `/assets/books/openlibrary-${match[1]}.${match[2].toLowerCase()}`
+      }
+    }
+
+    if (parsedUrl.hostname === 'api.dicebear.com') {
+      const seed = parsedUrl.searchParams.get('seed')
+
+      if (seed) {
+        const safeSeed = seed.replace(/[^a-zA-Z0-9_-]/g, '-')
+        return `/assets/avatars/dicebear-${safeSeed}.svg`
+      }
+    }
+  } catch (error) {
+    return url
+  }
+
+  return url
+}
+
+/**
  * 生成图书或头像背景图样式。
  *
  * @param url 图片地址
@@ -6,8 +47,10 @@
  * @return string
  */
 export function coverStyle(url, seed = '') {
-  if (url) {
-    return `linear-gradient(180deg, rgba(4,8,20,0.08), rgba(4,8,20,0.82)), url(${url})`
+  const assetUrl = resolveAssetUrl(url)
+
+  if (assetUrl) {
+    return `linear-gradient(180deg, rgba(4,8,20,0.08), rgba(4,8,20,0.82)), url(${assetUrl})`
   }
 
   const tones = [

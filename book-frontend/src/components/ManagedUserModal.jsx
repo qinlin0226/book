@@ -46,7 +46,7 @@ function ManagedUserModal({
             </label>
             <label>
               <span>头像链接</span>
-              <input value={managedUserForm.avatarUrl} onChange={(event) => onFormChange('avatarUrl', event.target.value)} placeholder="https://..." />
+              <input value={managedUserForm.avatarUrl} onChange={(event) => onFormChange('avatarUrl', event.target.value)} placeholder="/assets/avatars/dicebear-admin.svg" />
             </label>
             <label>
               <span>角色</span>
