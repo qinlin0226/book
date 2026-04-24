@@ -61,3 +61,10 @@ Thumbs.db
 /**/.flattened-pom.xml
 
 
+/book-system/book-book/target/
+/book-system/../target/
+/book-system/book-common/target/
+/book-system/book-gateway/target/
+/book-system/book-recommend/target/
+/book-system/book-record/target/
+/book-system/book-user/target/
