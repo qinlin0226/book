@@ -469,13 +469,79 @@ button {
 }
 
 .feed-cover {
-  background-size: cover;
   background-position: center;
-  transform: scale(1.03);
+  background-repeat: no-repeat;
+}
+
+.feed-cover-full {
+  background-color: rgba(5, 8, 18, 0.92);
+  background-size: contain;
+  opacity: 0;
+  transform: scale(0.88);
+  animation: feedCoverFullPreview 4.8s cubic-bezier(0.22, 1, 0.36, 1) infinite both;
+}
+
+/* 焦点封面循环执行完整预览到铺满背景的过渡效果。 */
+.feed-cover-zoom {
+  background-size: cover;
+  opacity: 0;
+  transform: scale(0.78);
+  animation: feedCoverZoomIn 4.8s cubic-bezier(0.22, 1, 0.36, 1) infinite both;
 }
 
 .feed-overlay {
   background: linear-gradient(180deg, rgba(4, 8, 18, 0.01), rgba(4, 8, 18, 0.24) 50%, rgba(4, 8, 18, 0.42) 74%, rgba(4, 8, 18, 0.56));
+}
+
+@keyframes feedCoverFullPreview {
+  0% {
+    opacity: 1;
+    transform: scale(0.92);
+  }
+
+  16% {
+    opacity: 1;
+    transform: scale(0.82);
+  }
+
+  30% {
+    opacity: 0.72;
+    transform: scale(0.86);
+  }
+
+  42%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes feedCoverZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+
+  18% {
+    opacity: 0;
+    transform: scale(0.78);
+  }
+
+  38% {
+    opacity: 1;
+    transform: scale(0.94);
+  }
+
+  52%,
+  88% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.03);
+  }
 }
 
 .feed-content {
@@ -575,10 +641,33 @@ button {
 }
 
 .feed-card-focus .feed-content h3 {
-  max-width: 10ch;
-  font-size: clamp(48px, 6vw, 84px);
-  line-height: 0.9;
+  max-width: min(720px, calc(100% - 96px));
+  font-size: clamp(46px, 5.8vw, 78px);
+  line-height: 0.94;
   margin: 8px 0 12px;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+/* 长书名降字号并限制行数，避免中文标题在封面上竖向堆叠。 */
+.feed-card-focus .feed-title-long {
+  display: -webkit-box;
+  max-width: min(780px, calc(100% - 88px));
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 1.04;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+/* 特别长的书名继续压缩字号并允许多展示一行，保留可读性。 */
+.feed-card-focus .feed-title-very-long {
+  max-width: min(820px, calc(100% - 80px));
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.08;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .swipe-note {

@@ -26,6 +26,19 @@ function HomeView({
   onOpenAuth,
   onEditBook,
 }) {
+  // 长书名使用更紧凑的标题样式，避免在焦点卡片中挤成竖排。
+  const feedTitle = currentFeedBook?.title || ''
+  const isLongFeedTitle = feedTitle.length > 14
+  const isVeryLongFeedTitle = feedTitle.length > 24
+  const feedTitleClassName = [
+    'feed-title',
+    isLongFeedTitle ? 'feed-title-long' : '',
+    isVeryLongFeedTitle ? 'feed-title-very-long' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+  const feedCoverImage = coverStyle(currentFeedBook?.coverUrl, feedTitle)
+
   return (
     <section className="feed-stage" onWheel={onFeedWheel} onTouchStart={onFeedTouchStart} onTouchEnd={onFeedTouchEnd}>
       {homeLoading ? (
@@ -34,7 +47,9 @@ function HomeView({
         <div className="empty-state wide">{searchKeyword.trim() ? '没有搜到匹配的图书，换个关键词试试。' : '当前没有可展示的图书。'}</div>
       ) : (
         <article className="feed-card feed-card-focus" key={currentFeedBook.id || currentFeedIndex}>
-          <div className="feed-cover" style={{ backgroundImage: coverStyle(currentFeedBook.coverUrl, currentFeedBook.title) }} />
+          {/* 双层封面用于切换时先展示完整封面，再放大到沉浸式背景。 */}
+          <div className="feed-cover feed-cover-full" style={{ backgroundImage: feedCoverImage }} />
+          <div className="feed-cover feed-cover-zoom" style={{ backgroundImage: feedCoverImage }} />
           <div className="feed-overlay" />
           {/* 顶部元信息固定在卡片顶部，避免随底部内容高度变化而漂移。 */}
           <div className="feed-topline">
@@ -55,7 +70,9 @@ function HomeView({
           </div>
           <div className="feed-content feed-content-focus">
             {/* 焦点卡片直接展示书名，去掉序号减少视觉压力 */}
-            <h3>{currentFeedBook.title}</h3>
+            <h3 className={feedTitleClassName} title={feedTitle}>
+              {feedTitle}
+            </h3>
             <p>{currentFeedBook.description || '适合在深夜刷到的那种书，几页就能进入状态。'}</p>
             <div className="meta-row">
               <span>{currentFeedBook.author || '匿名作者'}</span>
