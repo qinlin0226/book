@@ -12,11 +12,13 @@ function AdminView({
   adminMetrics,
   adminBookItems,
   editingBookId,
+  isBookFormOpen,
   bookForm,
   adminLoading,
   actionBookId,
   onBookFormChange,
   onBookSubmit,
+  onOpenCreateBook,
   onResetBookForm,
   onEditBook,
   onToggleBookStatus,
@@ -49,57 +51,15 @@ function AdminView({
       </div>
 
       <div className="admin-grid">
-        <form className="profile-card admin-form-card admin-card-fixed" onSubmit={onBookSubmit}>
-          <div className="section-title">
-            <span className="section-dot" />
-            <h3>{editingBookId ? '编辑图书' : '新增图书'}</h3>
-          </div>
-
-          <label>
-            <span>书名</span>
-            <input value={bookForm.title} onChange={(event) => onBookFormChange('title', event.target.value)} placeholder="像爆款封面一样醒目" required />
-          </label>
-          <div className="field-grid">
-            <label>
-              <span>作者</span>
-              <input value={bookForm.author} onChange={(event) => onBookFormChange('author', event.target.value)} placeholder="作者名" required />
-            </label>
-            <label>
-              <span>分类</span>
-              <input value={bookForm.category} onChange={(event) => onBookFormChange('category', event.target.value)} placeholder="小说 / 商业 / 科技" required />
-            </label>
-          </div>
-          <div className="field-grid">
-            <label>
-              <span>出版年份</span>
-              <input value={bookForm.publishYear} onChange={(event) => onBookFormChange('publishYear', event.target.value)} placeholder="2024" type="number" />
-            </label>
-            <label>
-              <span>封面链接</span>
-              <input value={bookForm.coverUrl} onChange={(event) => onBookFormChange('coverUrl', event.target.value)} placeholder="/assets/books/openlibrary-8027976.jpg" />
-            </label>
-          </div>
-          <label>
-            <span>简介</span>
-            <textarea value={bookForm.description} onChange={(event) => onBookFormChange('description', event.target.value)} placeholder="写一段让用户愿意停留的简介" rows="5" />
-          </label>
-
-          <div className="action-row">
-            <button className="primary-button" disabled={adminLoading}>
-              {adminLoading ? '提交中...' : editingBookId ? '保存修改' : '发布图书'}
-            </button>
-            {editingBookId ? (
-              <button className="ghost-button" type="button" onClick={onResetBookForm}>
-                取消编辑
-              </button>
-            ) : null}
-          </div>
-        </form>
-
         <div className="profile-card admin-list-card admin-card-fixed">
-          <div className="section-title">
-            <span className="section-dot" />
-            <h3>当前书库</h3>
+          <div className="admin-list-header">
+            <div className="section-title no-margin">
+              <span className="section-dot" />
+              <h3>当前书库</h3>
+            </div>
+            <button className="primary-button slim" type="button" onClick={onOpenCreateBook}>
+              新增图书
+            </button>
           </div>
 
           {adminLoading ? <div className="empty-inline">正在读取图书清单...</div> : null}
@@ -114,10 +74,10 @@ function AdminView({
                       <strong>{book.title}</strong>
                       <span className={`book-status ${book.statusClassName}`}>{book.statusLabel}</span>
                     </div>
-                        <p>作者：{book.author}</p>
-                        <p>分类：{book.category}</p>
-                        <p>出版年份：{book.publishYear || '年份待补'}</p>
-                        <span>简介：{book.description || '暂无简介'}</span>
+                    <p>作者：{book.author}</p>
+                    <p>分类：{book.category}</p>
+                    <p>出版年份：{book.publishYear || '年份待补'}</p>
+                    <span>简介：{book.description || '暂无简介'}</span>
                   </div>
                 </div>
                 <div className="admin-book-actions">
@@ -136,6 +96,64 @@ function AdminView({
           </div>
         </div>
       </div>
+
+      {isBookFormOpen ? (
+        <div className="auth-layer" onClick={onResetBookForm}>
+          <form className="auth-sheet admin-book-sheet" onSubmit={onBookSubmit} onClick={(event) => event.stopPropagation()}>
+            <div className="auth-header">
+              <div>
+                <span className="eyebrow">BOOK EDITOR</span>
+                <h3>{editingBookId ? '编辑图书' : '新增图书'}</h3>
+              </div>
+              <button className="ghost-button small" type="button" onClick={onResetBookForm}>
+                关闭
+              </button>
+            </div>
+
+            <div className="auth-form admin-book-form">
+              <label>
+                <span>书名</span>
+                <input value={bookForm.title} onChange={(event) => onBookFormChange('title', event.target.value)} placeholder="像爆款封面一样醒目" required />
+              </label>
+              <div className="field-grid">
+                <label>
+                  <span>作者</span>
+                  <input value={bookForm.author} onChange={(event) => onBookFormChange('author', event.target.value)} placeholder="作者名" required />
+                </label>
+                <label>
+                  <span>分类</span>
+                  <input value={bookForm.category} onChange={(event) => onBookFormChange('category', event.target.value)} placeholder="小说 / 商业 / 科技" required />
+                </label>
+              </div>
+              <div className="field-grid">
+                <label>
+                  <span>出版年份</span>
+                  <input value={bookForm.publishYear} onChange={(event) => onBookFormChange('publishYear', event.target.value)} placeholder="2024" type="number" />
+                </label>
+                <label>
+                  <span>封面链接</span>
+                  <input value={bookForm.coverUrl} onChange={(event) => onBookFormChange('coverUrl', event.target.value)} placeholder="/assets/books/openlibrary-8027976.jpg" />
+                </label>
+              </div>
+              <label>
+                <span>简介</span>
+                <textarea value={bookForm.description} onChange={(event) => onBookFormChange('description', event.target.value)} placeholder="写一段让用户愿意停留的简介" rows="5" />
+              </label>
+
+              <div className="action-row">
+                <button className="primary-button" disabled={adminLoading}>
+                  {adminLoading ? '提交中...' : editingBookId ? '保存修改' : '发布图书'}
+                </button>
+                {editingBookId ? (
+                  <button className="ghost-button" type="button" onClick={onResetBookForm}>
+                    取消编辑
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          </form>
+        </div>
+      ) : null}
     </section>
   )
 }

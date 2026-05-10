@@ -22,6 +22,7 @@ function AdminPageContainer({ isAdmin, editRequest }) {
   const { admin, actions } = useLibraryWorkspace()
   const [bookForm, setBookForm] = useState(emptyBookForm)
   const [editingBookId, setEditingBookId] = useState(null)
+  const [isBookFormOpen, setIsBookFormOpen] = useState(false)
 
   const adminMetrics = useMemo(() => getAdminMetrics(admin.adminBooks), [admin.adminBooks])
 
@@ -31,6 +32,7 @@ function AdminPageContainer({ isAdmin, editRequest }) {
     }
 
     setEditingBookId(editRequest.book.id)
+    setIsBookFormOpen(true)
     setBookForm({
       title: editRequest.book.title || '',
       author: editRequest.book.author || '',
@@ -59,7 +61,19 @@ function AdminPageContainer({ isAdmin, editRequest }) {
    */
   function resetBookForm() {
     setEditingBookId(null)
+    setIsBookFormOpen(false)
     setBookForm(emptyBookForm)
+  }
+
+  /**
+   * 打开新增图书独立表单。
+   *
+   * @return void
+   */
+  function openCreateBookForm() {
+    setEditingBookId(null)
+    setBookForm(emptyBookForm)
+    setIsBookFormOpen(true)
   }
 
   /**
@@ -70,6 +84,7 @@ function AdminPageContainer({ isAdmin, editRequest }) {
    */
   function editBook(book) {
     setEditingBookId(book.id)
+    setIsBookFormOpen(true)
     setBookForm({
       title: book.title || '',
       author: book.author || '',
@@ -108,11 +123,13 @@ function AdminPageContainer({ isAdmin, editRequest }) {
       adminMetrics={adminMetrics}
       adminBookItems={admin.adminBookItems}
       editingBookId={editingBookId}
+      isBookFormOpen={isBookFormOpen}
       bookForm={bookForm}
       adminLoading={admin.adminLoading}
       actionBookId={admin.actionBookId}
       onBookFormChange={updateBookForm}
       onBookSubmit={handleBookSubmit}
+      onOpenCreateBook={openCreateBookForm}
       onResetBookForm={resetBookForm}
       onEditBook={editBook}
       onToggleBookStatus={actions.toggleBookStatus}
